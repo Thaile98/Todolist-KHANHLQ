@@ -70,11 +70,26 @@ $('#deleteall').click(function () {
 });
 
 
-// $(document).on('dblclick','#list li',function () {
-// 	$(this).html('<input type="text" class="edittext" value="'+$(this).children().get(0).innerHTML+'">');
-// });
-// $(document).on('keypress','.edittext',function (key) {
-// 	if (key.key==='Enter' && $(this).val()!='') {
-// 		$(this).parent().html('<li><div class="text">'+$(this).val()+'</div><div class="remove">x</div><div class="clear"></div></li>')
-// 	}
-// })
+$(document).on('mousedown','.text',function (e) {
+	if( e.button == 2 ) {
+		// console.log($(this).val());
+		$(this).html('<input type="text" class="edittext" value="'+$(this).html()+'">');
+		$(this).removeClass('text');
+		$(this).css('width', '90%');
+		$(this).css('float', 'left');
+	}
+});
+$(document).on('keypress','.edittext',function (key) {
+	if (key.key==='Enter' && $(this).val()!='') {
+		$(this).parent().html('<div class="text">'+$(this).val()+'</div>');
+	}
+})
+document.oncontextmenu = function() {return false;};
+
+  // $(document).mousedown(function(e){ 
+  //   if( e.button == 2 ) { 
+  //     alert('Right mouse button!'); 
+  //     return false; 
+  //   } 
+  //   return true; 
+  // }); 
