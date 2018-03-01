@@ -2,10 +2,10 @@
 	margin: 0px;
 	padding: 0px;
 	font-family: roboto;
+
 }
 
 header{
-
 	text-align: center;
 	font-size: 50px;
 	color: #333;
@@ -74,6 +74,8 @@ footer{
 }
 .control{
 	margin: auto;
+	margin-top: 15px;
+	margin-bottom: 10px;
 	width: 30%;
 	display: flex;
 	justify-content: center;
@@ -85,6 +87,13 @@ button{
 	border: none;
 	border-radius: 3px;
 	cursor: pointer;
+}
+button:focus{
+	outline: 0;
+}
+.active{
+	background-color: #999;
+	color: white;
 }
 .bg-button{
 	background-color: #3FFB33 !important;

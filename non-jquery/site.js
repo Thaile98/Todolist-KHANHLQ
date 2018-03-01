@@ -1,3 +1,32 @@
+
+function checkView () {
+	return document.getElementById('f_all').classList.contains('active')?1:document.getElementById('f_active').classList.contains('active')?2:3;
+}
+
+function f_all () {
+	let li = document.getElementById('list').children;
+	for (var i = 0; i < li.length; i++) {
+		li[i].style.display = 'block';
+	}
+}
+function f_active () {
+	let li = document.getElementById('list').children;
+	for (var i = 0; i < li.length; i++) {
+		!li[i].classList.contains('checked')?li[i].style.display = 'block':li[i].style.display = 'none';
+	}
+}
+function f_completed () {
+	let li = document.getElementById('list').children;
+	for (var i = 0; i < li.length; i++) {
+		li[i].classList.contains('checked')?li[i].style.display = 'block':li[i].style.display = 'none';
+	}
+}
+function resetActive () {
+	document.getElementById('f_all').classList.remove('active');
+	document.getElementById('f_active').classList.remove('active');
+	document.getElementById('f_completed').classList.remove('active');
+}
+
 Reload = function() {
 	let Li=document.getElementById('list').getElementsByTagName('li');
 	let completed=0;
@@ -64,6 +93,7 @@ if (key.key==='Enter' && this.value!='') {
 	// 
 	// add Edit
 	addEdit();
+	checkView()==3?f_completed():'';
 }
 // document.getElementById('list').getElementsByTagName('li')[0].remove();
 // 
@@ -78,7 +108,8 @@ for (var i = 0; i < li.length; i++) {
 		li[i].addEventListener('click', function () {
 			this.classList.toggle('checked');
 			Reload();
-		})
+			checkView()==3?f_completed():'';
+			})
 	}
 
 // for (var i = 0; i < li.length; i++) {
@@ -100,21 +131,32 @@ document.getElementById('getall').addEventListener('click', function () {
 		for (var i = 0; i < li.length; i++) {
 			li[i].classList.remove('checked');
 			Reload();
+			checkView()==3?f_completed():'';
 		}
 	}
 	else
 		for (var i = 0; i < li.length; i++) {
 			li[i].classList.add('checked');
 			Reload();
+			checkView()==3?f_completed():'';
 		}
 	})
+function checked () {
+	let li = document.getElementById('list').children;
+	for (var j = 0; j < li.length; j++) {
+		console.log('i='+j);
+		return li[j].classList.contains('checked')?j:-1;
+	}
+}
 //Clear complete
 document.getElementById('deleteall').addEventListener('click',function () {
-	let li = document.getElementById('list').children;
-
-	for (var i = 0; i < li.length; i++) {
+	
+let li = document.getElementById('list').children;
+let len = li.length;
+	for (let i = 0; i < len; i++) {
 		// console.log(li[i]);
-		li[i].classList.contains('checked')?li[i].style.display = 'none':'';
+		// console.log(i);
+		li[checked()].remove();
 	}
 
 })
@@ -137,6 +179,27 @@ function addEdit () {
 	}
 }
 addEdit();
+document.getElementById('f_all').addEventListener('click', function (ele) {
+	resetActive();
+	ele.srcElement.classList.add('active');
+	f_all();
+	checkView()
+});
+document.getElementById('f_active').addEventListener('click', function (ele) {
+	resetActive();
+	ele.srcElement.classList.add('active');
+	f_active();
+	checkView()
+});
+document.getElementById('f_completed').addEventListener('click', function (ele) {
+	resetActive();
+	ele.srcElement.classList.add('active');
+	f_completed();
+	checkView()
+});
+
+
+
 
 
 

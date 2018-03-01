@@ -21,7 +21,7 @@ $('#todotext').keypress(function (key) {
 		$('#todotext').val('');
 		// refresh Count thing to do
 		F5();
-
+		checkView()?f_completed():'';
 		//remove get all bg
 	}
 })
@@ -38,6 +38,7 @@ $(document).on('click','.remove',function () {
 $(document).on('click','#list li',function () {
 	$(this).toggleClass('checked');
 	F5();
+	checkView()?f_completed():'';
 });
 
 $('#getall').click(function () {
@@ -60,6 +61,7 @@ $('#getall').click(function () {
 		$('#list li').addClass('checked');
 		F5();
 	}
+	checkView()?f_completed():'';
 	
 });
 $('#deleteall').click(function () {
@@ -85,6 +87,44 @@ $(document).on('keypress','.edittext',function (key) {
 	}
 })
 document.oncontextmenu = function() {return false;};
+
+$('#f_all').click(function () {
+	resetActive();
+	$(this).addClass('active');
+	$('#list li').each(function (index,val) {
+		$(this).css('display','block');
+	})
+})
+$('#f_active').click(function () {
+	resetActive();
+	$(this).addClass('active');
+	$('#list li').each(function () {
+		!$(this).hasClass('checked')?$(this).css('display', 'block'):$(this).css('display', 'none');
+	})
+})
+$('#f_completed').click(function () {
+	resetActive();
+	$(this).addClass('active');
+	$('#list li').each(function () {
+		$(this).hasClass('checked')?$(this).css('display', 'block'):$(this).css('display', 'none');
+	})
+})
+function resetActive () {
+	$('#f_all').removeClass('active');
+	$('#f_active').removeClass('active');
+	$('#f_completed').removeClass('active');
+
+}
+function f_completed () {
+	$('#list li').each(function () {
+		$(this).hasClass('checked')?$(this).css('display', 'block'):$(this).css('display', 'none');
+	})
+}
+function checkView () {
+	return $('#f_completed').hasClass('active')?true:false;
+}
+
+
 
   // $(document).mousedown(function(e){ 
   //   if( e.button == 2 ) { 

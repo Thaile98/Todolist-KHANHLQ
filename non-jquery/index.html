@@ -4,6 +4,7 @@
 	<title>To do List</title>
 
 	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 </head>
 <body>
 	<header>To do App</header>
@@ -12,19 +13,24 @@
 			<input type="text" id="todotext" placeholder="What need to be done?">
 			<ul id="list">
 				<li>
-					<div class="text">abc</div>
+					<div class="text">1</div>
 					<div class="remove">x</div>
 					<div class="clear"></div>
 				</li>
 				<li>
-					<div class="text">abc</div>
+					<div class="text">2</div>
 					<div class="remove">x</div>
 					<div class="clear"></div>
 				</li>
 			</ul>
 		</div>
 		<div class="control">
-			<button id="getall">Get All</button>
+			<button id="f_all" class="active">All</button>
+			<button id="f_active">Active</button>
+			<button id="f_completed">Completed</button>
+		</div>
+		<div class="control">
+			<button id="getall">Complete All</button>
 			<button id="deleteall">Clear completed</button>
 		</div>
 	</section>
